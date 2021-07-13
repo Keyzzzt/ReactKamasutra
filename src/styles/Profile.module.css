@@ -1,0 +1,10 @@
+.content{
+    grid-area: c;
+    height: 100vh;
+    padding: 10px;
+    background-color: hotpink;
+}
+.content img{
+    height: 150px;
+    width: 100%;
+}
