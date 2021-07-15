@@ -2,8 +2,17 @@
     grid-area: n;
     padding: 10px;
     background-color: firebrick;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .item{
     color: #fff;
+    display: block;
     text-decoration: none;
+    padding: 10px;
+}
+
+.item.active{
+    color: gold;
 }

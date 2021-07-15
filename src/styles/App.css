@@ -10,3 +10,10 @@
     grid-gap: 10px;    
 }
 
+.app-wrapper-content {
+        grid-area: c;
+        height: 100vh;
+        padding: 10px;
+        background-color: hotpink;
+}
+
