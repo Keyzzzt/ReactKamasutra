@@ -2,7 +2,9 @@ import React from 'react'
 import s from './../../../styles/MyPosts.module.css'
 import Post from './Post/Post'
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
+
   return (
     <div className={s.myPosts}>
       <h3>My Posts</h3>
@@ -12,11 +14,7 @@ const MyPosts = () => {
         </div>
         <button>Add post</button>
       </div>
-      <Post message="How are You?" />
-      <Post message="Hi, my name is Bond, James Bond!" />
-      <Post />
-      <Post />
-      <Post />
+      {props.posts.map(p => <Post message={p.post} />)}
     </div>
   );
 }
