@@ -4,6 +4,9 @@ import Post from './Post/Post'
 
 const MyPosts = (props) => {
 
+  const addPost = () => {
+    alert('Hello')
+  }
 
   return (
     <div className={s.myPosts}>
@@ -12,7 +15,7 @@ const MyPosts = (props) => {
         <div>
           <textarea name="" id="" cols="20" rows="3"></textarea>
         </div>
-        <button>Add post</button>
+        <button onClick={addPost}>Add post</button>
       </div>
       {props.posts.map(p => <Post message={p.post} />)}
     </div>
