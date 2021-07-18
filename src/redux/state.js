@@ -1,3 +1,5 @@
+import { reRenderEntireTree } from "../render"
+
 export let state = {
     posts: [
         { post: 'How are You?' },
@@ -16,5 +18,13 @@ export let state = {
         { id: 1, message: 'Hello from James' },
         { id: 2, message: 'Hello from Bond' },
         { id: 3, message: 'Hello from James Bond' }
-      ]
+      ],
+}
+
+export const addPost  = (postText) =>{
+  let newPost = {
+    post: postText
+  }
+  state.posts.push(newPost)
+  reRenderEntireTree(state)
 }

@@ -24,7 +24,7 @@ const App = (props) => {
 
             {/* Либо так */}
             <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
-            <Route path='/profile' render={() => <Profile posts={props.posts}/>}/>
+            <Route path='/profile' render={() => <Profile posts={props.posts} addPost={props.addPost}/>}/>
 
           </div>
       </div>  
