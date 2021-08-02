@@ -9,7 +9,6 @@ const Dialogs = (props) => {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {props.dialogs.map(el => <DialogItem name={el.name} id={el.id} />)}
-
             </div>
             <div className={s.messages}>
                 {props.messages.map(m => <Message message={m.message} />)}
