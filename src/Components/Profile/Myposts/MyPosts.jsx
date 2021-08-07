@@ -7,7 +7,7 @@ const MyPosts = (props) => {
   let postList = props.posts.map(p => <Post message={p.message} />)
 
   const createNewPostHandler = () => {
-    props.dispatch({type: 'ADD_POST'})
+    props.dispatch({type: 'ADD-POST'})
   }
 
   const updatePostInput = () => {
