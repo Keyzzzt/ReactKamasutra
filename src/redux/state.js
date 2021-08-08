@@ -1,5 +1,3 @@
-
-
 import {
     ADD_POST,
     UPDATE_POST_TEXT,
@@ -54,8 +52,6 @@ let store = {
     }
 
 }
-
-
 
 export const addPostAC = () => ({type: ADD_POST})
 export const updatePostTextAC = (text) => ({ type: UPDATE_POST_TEXT, payload: text })
