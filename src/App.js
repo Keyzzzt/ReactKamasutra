@@ -24,8 +24,11 @@ const App = (props) => {
 
             {/* Либо так */}
             <Route path='/dialogs' render={() => <Dialogs 
+                dispatch={props.dispatch} 
                 dialogs={props.state.dialogsPage.dialogs} 
-                messages={props.state.dialogsPage.messages}/>}/>
+                newMessageText={props.state.dialogsPage.newMessageText} 
+                messages={props.state.dialogsPage.messages}/>}
+                />
             <Route path='/profile' render={() => <Profile 
                 posts={props.state.profilePage.posts} 
                 dispatch={props.dispatch} 
