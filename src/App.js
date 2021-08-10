@@ -1,11 +1,11 @@
+import React from "react";
 import {Route, BrowserRouter} from 'react-router-dom'
-import Dialogs from './Components/Dialogs/Dialogs'
 import Header from './Components/Header/Header'
 import Navbar from './Components/Navbar/Navbar'
 import Profile from './Components/Profile/Profile'
 import  './styles/App.css'
+import DialogsContainer from "./Components/DialogsContainer";
 
-let returnComponent = () => <Dialogs/>
 const App = (props) => {
   return (
     <BrowserRouter>
@@ -23,7 +23,7 @@ const App = (props) => {
             <Route path='/profile' component={() => <Profile posts={props.posts} />}/> */}
 
             {/* Либо так */}
-            <Route path='/dialogs' render={() => <Dialogs />}
+            <Route path='/dialogs' render={() => <DialogsContainer />}
                 />
             <Route path='/profile' render={() => <Profile />}/>
           </div>

@@ -1,7 +1,6 @@
 import React, { createRef } from 'react'
 import s from './../../../styles/MyPosts.module.css'
 import Post from './Post/Post'
-import { addPostAC, updatePostTextAC } from './../../../redux/state'
 
 
 
@@ -10,12 +9,12 @@ const MyPosts = (props) => {
   let postList = props.posts.map(p => <Post message={p.message} />)
 
   const createNewPostHandler = () => {
-    props.dispatch(addPostAC())
+    props.addPost()
   }
 
   const updatePostInput = () => {
     let text = newPostRef.current.value;
-    props.dispatch(updatePostTextAC(text))
+    props.updatePostText(text)
   }
 
   return (

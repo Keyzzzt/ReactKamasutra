@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import store from './redux/reduxStore'
-import StoreContext, {Provider} from "./storeContext";
+import {Provider} from "react-redux";
 
-let reRenderEntireTree = (state) => {
+
+let reRenderEntireTree = () => {
     ReactDOM.render(
       <React.StrictMode>
           <Provider store={store}>
