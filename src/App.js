@@ -23,16 +23,9 @@ const App = (props) => {
             <Route path='/profile' component={() => <Profile posts={props.posts} />}/> */}
 
             {/* Либо так */}
-            <Route path='/dialogs' render={() => <Dialogs 
-                dispatch={props.dispatch} 
-                dialogs={props.state.dialogsPage.dialogs} 
-                newMessageText={props.state.dialogsPage.newMessageText} 
-                messages={props.state.dialogsPage.messages}/>}
+            <Route path='/dialogs' render={() => <Dialogs />}
                 />
-            <Route path='/profile' render={() => <Profile 
-                posts={props.state.profilePage.posts} 
-                dispatch={props.dispatch} 
-                newPostText={props.state.profilePage.newPostText}/>}/>
+            <Route path='/profile' render={() => <Profile />}/>
           </div>
       </div>  
     </BrowserRouter>
