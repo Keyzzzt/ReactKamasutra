@@ -19,17 +19,17 @@ let initialState = {
 
 export const dialogsReducer = (state = initialState, action) => {
     switch(action.type){
-        case UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.payload
-            return state
-        case CREATE_MESSAGE:
-            if(state.newMessageText === ''){
+        case UPDATE_MESSAGE_TEXT: {
+            return {...state, newMessageText: action.payload}
+        }
+        case CREATE_MESSAGE: {
+            if (state.newMessageText === '') {
                 alert('Please enter message')
                 return state
             }
-            state.messages.push({id:3, message: state.newMessageText})
-            state.newMessageText = ''
-            return state
+            let newMessage = {id: 3, message: state.newMessageText}
+            return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
+        }
         default:
             return state
     }

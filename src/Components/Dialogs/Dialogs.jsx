@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './../../styles/Dialogs.module.css'
 import Message from './Message'
+import DialogItem from "./DialogItem";
 
 const Dialogs = (props) => {
     const messageTextHandler = (e) => {
@@ -14,10 +15,10 @@ const Dialogs = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {/*{props.dialogs.map(el => <DialogItem name={el.name} id={el.id} />)}*/}
+                {props.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id} />)}
             </div>
             <div className={s.messages}>
-                {props.messages.map(m => <Message message={m.message} />)}
+                {props.messages.map(m => <Message key={m.id} message={m.message} />)}
             </div>
             {props.a}
             <input type="text" onChange={messageTextHandler} value={props.newMessageText} />

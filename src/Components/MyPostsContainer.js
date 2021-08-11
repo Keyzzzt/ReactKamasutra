@@ -6,12 +6,10 @@ import MyPosts from "./Profile/Myposts/MyPosts";
 let mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        newPostText: state.profilePage.newPostText,
     }
 }
-let mapDispatchTy
-
-oProps = (dispatch) => {
+let mapDispatchToProps = (dispatch) => {
     return {
         addPost: ()  => {
             dispatch(addPostAC())

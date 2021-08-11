@@ -6,7 +6,7 @@ import Post from './Post/Post'
 
 const MyPosts = (props) => {
   let newPostRef = createRef()
-  let postList = props.posts.map(p => <Post message={p.message} />)
+  let postList = props.posts.map(p => <Post key={p.id} message={p.message} />)
 
   const createNewPostHandler = () => {
     props.addPost()
