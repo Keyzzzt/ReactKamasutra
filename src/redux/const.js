@@ -7,3 +7,6 @@ export const CREATE_MESSAGE = 'CREATE_MESSAGE'
 export const FOLLOW_UNFOLLOW = 'FOLLOW_UNFOLLOW'
 export const SET_USERS = 'SET_USERS'
 
+export const SET_ACTIVE_PAGE = 'SET_ACTIVE_PAGE'
+export const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
+
