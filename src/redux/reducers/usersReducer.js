@@ -1,7 +1,14 @@
-import {FOLLOW_UNFOLLOW, SET_ACTIVE_PAGE, SET_TOTAL_COUNT, SET_USERS} from "../const";
+import {
+    FOLLOW_UNFOLLOW,
+    SET_ACTIVE_PAGE,
+    SET_TOTAL_COUNT,
+    SET_USERS,
+    TOGGLE_ISFETCHING_USERS
+} from "../const";
 
 const initialState = {
     users: [],
+    isFetching: false,
     pageSize: 100,
     totalUsersCount: 0,
     currentPage: 1
@@ -9,6 +16,8 @@ const initialState = {
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        case TOGGLE_ISFETCHING_USERS:
+            return {...state, isFetching: !state.isFetching}
         case SET_USERS:
             // return ниже будеть при новом запросе будет добавлять пользователей вниз списка
             // return {...state, users: [...state.users, ...action.payload]}
@@ -31,9 +40,10 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const followUnfollowAC = (userId) => ({type: FOLLOW_UNFOLLOW, payload:  userId})
-export const setUsersAC = (users) => ({type: SET_USERS, payload: users})
-export const setCurrentPageAC = (pageNumber) => ({type: SET_ACTIVE_PAGE, payload: pageNumber})
-export const setTotalCountAC = (totalCount) => ({type: SET_TOTAL_COUNT, payload: totalCount})
+export const followUnfollow = (userId) => ({type: FOLLOW_UNFOLLOW, payload:  userId})
+export const setUsers = (users) => ({type: SET_USERS, payload: users})
+export const setCurrentPage = (pageNumber) => ({type: SET_ACTIVE_PAGE, payload: pageNumber})
+export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, payload: totalCount})
+export const toggleIsFetching = () => ({type: TOGGLE_ISFETCHING_USERS})
 
 export default usersReducer

@@ -1,7 +1,7 @@
 
 import {
     UPDATE_MESSAGE_TEXT,
-    CREATE_MESSAGE
+    CREATE_MESSAGE, ADD_POST, UPDATE_POST_TEXT
 } from '../const'
 
 let initialState = {
@@ -34,5 +34,9 @@ export const dialogsReducer = (state = initialState, action) => {
             return state
     }
 }
+
+
+export const updateMessageTextAC = (text) => ({ type: UPDATE_MESSAGE_TEXT, payload: text })
+export const createNewMessageAC = () => ({type: CREATE_MESSAGE})
 
 export default dialogsReducer
