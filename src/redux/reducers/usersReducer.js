@@ -1,5 +1,6 @@
 import {
-    FOLLOW_UNFOLLOW,
+    FOLLOW,
+    UNFOLLOW,
     SET_ACTIVE_PAGE,
     SET_TOTAL_COUNT,
     SET_USERS,
@@ -26,13 +27,20 @@ const usersReducer = (state = initialState, action) => {
             return {...state, users: action.payload.items}
         case SET_TOTAL_COUNT:
             return {...state, totalUsersCount: action.payload}
-        case FOLLOW_UNFOLLOW:
+        case FOLLOW:
            return {...state, users: state.users.map(user => {
                if(user.id === action.payload){
-                   return {...user, follow: !user.follow}
+                   return {...user, followed: true}
                }
                return user
                })}
+        case UNFOLLOW:
+            return {...state, users: state.users.map(user => {
+                    if(user.id === action.payload){
+                        return {...user, followed: false}
+                    }
+                    return user
+                })}
         case SET_ACTIVE_PAGE :
             return {...state, currentPage: action.payload}
         default:
@@ -40,7 +48,8 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const followUnfollow = (userId) => ({type: FOLLOW_UNFOLLOW, payload:  userId})
+export const follow = (userId) => ({type: FOLLOW, payload:  userId})
+export const unFollow = (userId) => ({type: UNFOLLOW, payload:  userId})
 export const setUsers = (users) => ({type: SET_USERS, payload: users})
 export const setCurrentPage = (pageNumber) => ({type: SET_ACTIVE_PAGE, payload: pageNumber})
 export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, payload: totalCount})

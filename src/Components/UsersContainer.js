@@ -5,7 +5,7 @@ import {
     followUnfollow,
     setCurrentPage,
     setTotalCount,
-    setUsers
+    setUsers, follow, unFollow
 } from "../redux/reducers/usersReducer";
 import * as axios from "axios";
 import Users from "./Users/Users";
@@ -15,7 +15,9 @@ class UsersContainer extends React.Component{
     componentDidMount() {
         this.props.toggleIsFetching()
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+                withCredentials: true
+            })
             .then(response =>{
                 console.log(response)
                 this.props.setUsers(response.data)
@@ -24,12 +26,17 @@ class UsersContainer extends React.Component{
             })
 
     }
-    followUnfollowHandler = (userId) => this.props.followUnfollow(userId)
+    // follow, unFolow тут не action creator, это callback который создал connect, а называется так же для коройткой записи объекта передаваемого в connect.
+    follow = (userId) => this.props.follow(userId)
+    unFollow = (userId) => this.props.unFollow(userId)
+
     setCurrentPageHandler = (pageNumber) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching()
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{
+                withCredentials: true
+            })
             .then(response =>{
                 this.props.setUsers(response.data)
                 this.props.toggleIsFetching()
@@ -48,7 +55,8 @@ class UsersContainer extends React.Component{
                     users = {this.props.users}
                     pageSize = {this.props.pageSize}
                     setCurrentPageHandler = {this.setCurrentPageHandler}
-                    followUnfollowHandler = {this.followUnfollowHandler}
+                    follow= {this.follow}
+                    unFollow = {this.unFollow}
                     isFetching = {this.props.isFetching}
                 />
             </>
@@ -79,7 +87,8 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps,{
-    followUnfollow,
+    follow,
+    unFollow,
     setUsers,
     setCurrentPage,
     setTotalCount,
