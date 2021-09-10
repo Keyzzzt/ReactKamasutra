@@ -1,10 +1,9 @@
-
-
 import {
     ADD_POST,
     UPDATE_POST_TEXT,
     SET_USER_PROFILE
 } from '../const'
+import {usersAPI} from "../../api/api";
 
 let initialState = {
     posts: [
@@ -35,8 +34,17 @@ const profileReducer = (state = initialState, action) => {
             return state
     }
 }
+
+// Action creators
 export const addPostAC = () => ({type: ADD_POST})
 export const updatePostTextAC = (text) => ({ type: UPDATE_POST_TEXT, payload: text })
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, payload: profile})
+
+// Thunk creators
+export const getUsersProfileThinkCreator = (userId) => (dispatch) => {
+    usersAPI.getUserProfile(userId).then(response => {
+        dispatch(setUserProfile(response))
+    })
+}
 
 export default profileReducer

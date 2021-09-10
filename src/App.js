@@ -4,8 +4,9 @@ import Navbar from './Components/Navbar/Navbar'
 import  './styles/App.css'
 import DialogsContainer from "./Components/DialogsContainer";
 import UsersContainer from "./Components/UsersContainer";
-import ProfileContainer from "./Components/Profile/ProfileInfo/ProfileContainer";
+import ProfileContainer from "./Components/ProfileContainer";
 import HeaderContainer from "./Components/HeaderContainer";
+import Signin from "./Components/Signin/Signin";
 
 const App = (props) => {
   return (
@@ -17,6 +18,7 @@ const App = (props) => {
             <Route path='/dialogs' render={() => <DialogsContainer />} />
             <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
             <Route path='/users' render={() => <UsersContainer/>}/>
+            <Route path='/signin' render={() => <Signin/>}/>
           </div>
       </div>  
     </BrowserRouter>

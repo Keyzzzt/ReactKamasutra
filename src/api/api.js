@@ -11,6 +11,19 @@ const requestSetup = axios.create({
 })
 
 export const usersAPI = {
+    getUserCredentials: function(){
+      return requestSetup
+          .get('auth/me').then(response => {
+              if(response.data.resultCode === 0){
+                  return response.data.data
+              }
+          })
+    },
+    getUserProfile: function(userId){
+      return requestSetup
+          .get(`profile/${userId}`)
+          .then(response => response.data)
+    },
     getUsers: function(currentPage, pageSize) {
         return requestSetup
             .get(`users?page=${currentPage}&count=${pageSize}`)
@@ -26,6 +39,7 @@ export const usersAPI = {
             .delete(`follow/${userId}`)
             .then(response => response.data.resultCode)
     }
+
 }
 
 
