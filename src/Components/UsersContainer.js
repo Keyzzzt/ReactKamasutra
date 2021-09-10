@@ -11,6 +11,8 @@ import {
 } from "../redux/reducers/usersReducer";
 import Users from "./Users/Users";
 import Loader from "./Loader";
+import {withAuthRedirect} from "../HOC/WithAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component{
     componentDidMount() {
@@ -64,12 +66,25 @@ const mapStateToProps = (state) => {
 // }
 
 
+// // Без compose
+// const UsersWithRedirect = withAuthRedirect(UsersContainer)
+// export default connect(mapStateToProps,{
+//     setUsers,
+//     setCurrentPage,
+//     setTotalCount,
+//     getUsersThunkCreator,
+//     followThunkCreator,
+//     unFollowThunkCreator
+// })(UsersContainer)
 
-export default connect(mapStateToProps,{
-    setUsers,
-    setCurrentPage,
-    setTotalCount,
-    getUsersThunkCreator,
-    followThunkCreator,
-    unFollowThunkCreator
-})(UsersContainer)
+export default compose(
+    connect(mapStateToProps,{
+        setUsers,
+        setCurrentPage,
+        setTotalCount,
+        getUsersThunkCreator,
+        followThunkCreator,
+        unFollowThunkCreator
+    }),
+    withAuthRedirect
+)(UsersContainer)
