@@ -1,9 +1,10 @@
 import React from 'react'
 import s from './../../../styles/Profile.module.css'
 import Loader from "../../Loader";
+import ProfileStatus from "../ProfileStatus";
 
 
-const ProfileInfo = ({profile}) => {
+const ProfileInfo = ({profile, status, updateStatusThunkCreator}) => {
     if (!profile){
         return <Loader />
     }
@@ -12,6 +13,7 @@ const ProfileInfo = ({profile}) => {
       <img className={s.profileBackground} src="https://www.istockphoto.com/resources/images/HomePage/Hero/1204187820.jpg" alt="background" />
       <div className={s.profileInfo}>
         <h3>Profile Info</h3>
+          <ProfileStatus status={status} updateStatusThunkCreator={updateStatusThunkCreator}/>
           <img src={profile.photos.small} alt=""/>
           <div>Имя: {profile.fullName}</div>
           <div>About Me: {profile.aboutMe}</div>

@@ -16,4 +16,5 @@ export const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 
 export const SET_USER_PROFILE = 'SET_USER_PROFILE'
 export const SET_USER_DATA = 'SET_USER_DATA'
+export const GET_STATUS = 'GET_STATUS'
 
