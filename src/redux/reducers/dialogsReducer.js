@@ -1,7 +1,6 @@
 
 import {
-    UPDATE_MESSAGE_TEXT,
-    CREATE_MESSAGE, ADD_POST, UPDATE_POST_TEXT
+    CREATE_MESSAGE
 } from '../const'
 
 let initialState = {
@@ -14,21 +13,13 @@ let initialState = {
         {id:1, message:'Hello' },
         {id:2, message:'Hola' },
     ],
-    newMessageText: ''
 }
 
 export const dialogsReducer = (state = initialState, action) => {
     switch(action.type){
-        case UPDATE_MESSAGE_TEXT: {
-            return {...state, newMessageText: action.payload}
-        }
         case CREATE_MESSAGE: {
-            if (state.newMessageText === '') {
-                alert('Please enter message')
-                return state
-            }
-            let newMessage = {id: 3, message: state.newMessageText}
-            return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
+            let newMessage = {id: 3, message: action.payload}
+            return {...state, messages: [...state.messages, newMessage]}
         }
         default:
             return state
@@ -36,7 +27,6 @@ export const dialogsReducer = (state = initialState, action) => {
 }
 
 
-export const updateMessageTextAC = (text) => ({ type: UPDATE_MESSAGE_TEXT, payload: text })
-export const createNewMessageAC = () => ({type: CREATE_MESSAGE})
+export const createNewMessageAC = (value) => ({type: CREATE_MESSAGE, payload: value})
 
 export default dialogsReducer

@@ -1,6 +1,5 @@
 import {
     ADD_POST,
-    UPDATE_POST_TEXT,
     SET_USER_PROFILE,
     GET_STATUS
 } from '../const'
@@ -12,7 +11,6 @@ let initialState = {
         {id:2, message: 'Bond', likesCount: 2},
         {id:3, message: 'James Bond', likesCount: 2},
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -22,13 +20,10 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let newPost = {
                 id: 3,
-                message: state.newPostText,
+                message: action.payload,
                 likesCount: 0
             }
-            return {...state, posts: [...state.posts, newPost], newPostText: ''}
-        }
-        case UPDATE_POST_TEXT: {
-            return {...state, newPostText: action.payload}
+            return {...state, posts: [...state.posts, newPost]}
         }
         case SET_USER_PROFILE:
             return {...state, profile: action.payload}
@@ -40,8 +35,7 @@ const profileReducer = (state = initialState, action) => {
 }
 
 // Action creators
-export const addPostAC = () => ({type: ADD_POST})
-export const updatePostTextAC = (text) => ({ type: UPDATE_POST_TEXT, payload: text })
+export const addPostAC = (value) => ({type: ADD_POST, payload: value})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, payload: profile})
 export const setStatusAC = (status) => ({type: GET_STATUS, payload: status})
 

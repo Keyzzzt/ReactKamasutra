@@ -5,6 +5,7 @@ const Login = () => {
     // 3. Говорим что делать с данными
     const onSubmitHandler = (formData) => {
         // Тут обраюатываем объект с данными
+        console.log(formData)
     }
     return (
         <div>
