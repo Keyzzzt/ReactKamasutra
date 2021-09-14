@@ -1,13 +1,13 @@
-import React, { createRef } from 'react'
-import s from './../../../styles/MyPosts.module.css'
-import Post from './Post/Post'
+import React, { createRef } from 'react';
+import s from './../../../styles/MyPosts.module.css';
+import Post from './Post/Post';
 import AddPostForm from "../../Forms/AddPostForm";
 
 
 
 const MyPosts = (props) => {
-  let newPostRef = createRef()
-  let postList = props.posts.map(p => <Post key={p.id} message={p.message} />)
+  let newPostRef = createRef();
+  let postList = props.posts.map(p => <Post key={p.id} message={p.message} />);
 
   const onSubmitHandler = (value) => {
     props.addPost(value.newPostBody)
@@ -22,4 +22,4 @@ const MyPosts = (props) => {
   );
 }
 
-export default MyPosts
+export default MyPosts;

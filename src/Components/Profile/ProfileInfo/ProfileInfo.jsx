@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './../../../styles/Profile.module.css'
-import Loader from "../../Loader";
+import Loader from "../../common/Loader";
 import ProfileStatus from "../ProfileStatus";
 
 

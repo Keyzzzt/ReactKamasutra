@@ -1,5 +1,7 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
+import {Input} from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/reduxFormValidators";
 
 const Login = () => {
     // 3. Говорим что делать с данными
@@ -14,6 +16,11 @@ const Login = () => {
         </div>
     )
 }
+
+// Когда мы передаем функцию с замыканием в компоненту, она возвращает нам новую функцию
+// поэтому начинаются проблемы, поэтому вызов maxLengthCreator нужно сделать за пределами компоненты
+const maxLength20 = maxLengthCreator(20)
+
 // В props redux-form закинет очень много функционала
 const LoginForm = (props) => {
     return (
@@ -21,13 +28,13 @@ const LoginForm = (props) => {
         <form onSubmit={props.handleSubmit}>
             <h1>Login</h1>
             <div>
-                <Field name={"login"} placeholder={"Login"} component={"input"}/>
+                <Field name={"login"} placeholder={"Login"} component={Input} validate={[required, maxLength20]}/>
             </div>
             <div>
-                <Field name={"password"} placeholder={"Password"} component={"input"}/>
+                <Field name={"password"} placeholder={"Password"} component={Input} validate={[required, maxLength20]}/>
             </div>
             <div>
-                <Field name={"rememberMe"} type="checkbox" component={"input"}/> Remember Me
+                <Field name={"rememberMe"} type="checkbox" component={Input}/> Remember Me
             </div>
             <div>
                 <button>Submit</button>

@@ -10,7 +10,7 @@ import {
     followThunkCreator, unFollowThunkCreator
 } from "../redux/reducers/usersReducer";
 import Users from "./Users/Users";
-import Loader from "./Loader";
+import Loader from "./common/Loader";
 import {withAuthRedirect} from "../HOC/WithAuthRedirect";
 import {compose} from "redux";
 
