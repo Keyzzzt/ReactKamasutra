@@ -16,3 +16,5 @@ export const SET_USER_PROFILE = 'SET_USER_PROFILE'
 export const SET_USER_DATA = 'SET_USER_DATA'
 export const GET_STATUS = 'GET_STATUS'
 
+export const SET_INITIALIZED = 'SET_INITIALIZED'
+

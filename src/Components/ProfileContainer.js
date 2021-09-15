@@ -8,12 +8,17 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../HOC/WithAuthRedirect";
 import {compose} from "redux";
+import Loader from "./common/Loader";
 
 class ProfileContainer extends React.Component{
     componentDidMount() {
         let userId = this.props.match.params.userId
         if(!userId){
-            userId = 11203
+            userId = this.props.authorizedUserId
+            if(!userId){
+                // this.props.history.push('/login')
+            }
+
         }
         this.props.getUsersProfileThunkCreator(userId)
         this.props.getStatusThunkCreator(userId)
@@ -21,6 +26,9 @@ class ProfileContainer extends React.Component{
 
 
     render(){
+        if(!this.props.authorizedUserId){
+            return <Loader />
+        }
 
         return (
             <div>
@@ -32,7 +40,9 @@ class ProfileContainer extends React.Component{
 
 const mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 
 // // Без compose()()
@@ -47,7 +57,7 @@ const mapStateToProps = (state) => ({
 export default compose(
     connect(mapStateToProps, {getUsersProfileThunkCreator, getStatusThunkCreator, updateStatusThunkCreator}),
     withRouter,
-    // withAuthRedirect
+    withAuthRedirect
 )(ProfileContainer)
 
 

@@ -1,18 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    toggleIsFetching,
     setCurrentPage,
     setTotalCount,
     setUsers,
-    followUnfollowInProgress,
     getUsersThunkCreator,
     followThunkCreator, unFollowThunkCreator
 } from "../redux/reducers/usersReducer";
 import Users from "./Users/Users";
 import Loader from "./common/Loader";
-import {withAuthRedirect} from "../HOC/WithAuthRedirect";
-import {compose} from "redux";
 
 class UsersContainer extends React.Component{
     componentDidMount() {
@@ -77,14 +73,11 @@ const mapStateToProps = (state) => {
 //     unFollowThunkCreator
 // })(UsersContainer)
 
-export default compose(
-    connect(mapStateToProps,{
+export default connect(mapStateToProps,{
         setUsers,
         setCurrentPage,
         setTotalCount,
         getUsersThunkCreator,
         followThunkCreator,
         unFollowThunkCreator
-    }),
-    withAuthRedirect
-)(UsersContainer)
+    })(UsersContainer)

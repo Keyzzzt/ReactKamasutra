@@ -2,12 +2,18 @@ import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/reduxFormValidators";
+import {connect} from "react-redux";
+import {loginThunkCreator} from "../../redux/reducers/authReducer";
+import {Redirect} from "react-router-dom";
+import styles from './../common/FormsControls/formControls.module.css'
 
-const Login = () => {
+const Login = (props) => {
     // 3. Говорим что делать с данными
-    const onSubmitHandler = (formData) => {
-        // Тут обраюатываем объект с данными
-        console.log(formData)
+    const onSubmitHandler = ({email, password, rememberMe}) => {
+        props.loginThunkCreator(email, password, rememberMe)
+    }
+    if(props.isAuth){
+        return <Redirect to={"/profile"} />
     }
     return (
         <div>
@@ -28,14 +34,15 @@ const LoginForm = (props) => {
         <form onSubmit={props.handleSubmit}>
             <h1>Login</h1>
             <div>
-                <Field name={"login"} placeholder={"Login"} component={Input} validate={[required, maxLength20]}/>
+                <Field name={"email"} placeholder={"Email"} component={Input} validate={[required, maxLength20]}/>
             </div>
             <div>
-                <Field name={"password"} placeholder={"Password"} component={Input} validate={[required, maxLength20]}/>
+                <Field name={"password"} type={"password"} placeholder={"Password"} component={Input} validate={[required, maxLength20]}/>
             </div>
             <div>
                 <Field name={"rememberMe"} type="checkbox" component={Input}/> Remember Me
             </div>
+            {props.error && <div className={styles.formSummaryError}>{props.error}</div>}
             <div>
                 <button>Submit</button>
             </div>
@@ -49,5 +56,9 @@ const ReduxLoginForm = reduxForm({
     form: 'login'
 })(LoginForm)
 
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
 
-export default Login;
+// Чтобы не засорять презентационную компоненту подключаем connect
+export default connect(mapStateToProps, {loginThunkCreator})(Login);

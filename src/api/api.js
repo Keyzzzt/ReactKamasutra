@@ -11,14 +11,6 @@ const requestSetup = axios.create({
 })
 
 export const usersAPI = {
-    getUserCredentials: function(){
-      return requestSetup
-          .get('auth/me').then(response => {
-              if(response.data.resultCode === 0){
-                  return response.data.data
-              }
-          })
-    },
     getUsers: function(currentPage, pageSize) {
         return requestSetup
             .get(`users?page=${currentPage}&count=${pageSize}`)
@@ -37,7 +29,7 @@ export const usersAPI = {
     // Следующим образом мы можем старый метод который испоьзуется в коде, оставить рабочим, но функционал делегировать другому методу.
     getUserProfile: function(userId){
         console.warn('Obsolete method. Please use profileAPI object.')
-        return profileAPI.getUserProfile(userId)
+        return profileAPI.getUserProfile(userId);
     },
 }
 
@@ -54,7 +46,26 @@ export const profileAPI = {
     },
     updateStatus: function (status) {
         return requestSetup
-            .put(`profile/status`,{ status: status})
+            .put(`profile/status`,{ status: status});
+    }
+
+}
+
+export const authAPI = {
+    authMe: function(){
+        return requestSetup.get('auth/me')
+            .then(response => {
+                if(response.data.resultCode === 0){
+                    return response.data.data
+                }
+            });
+    },
+    login: function(email, password, rememberMe = false){
+        return requestSetup.post('auth/login', {email, password, rememberMe})
+    },
+    logout: function(){
+        return requestSetup.delete('auth/login');
+
     }
 
 }
