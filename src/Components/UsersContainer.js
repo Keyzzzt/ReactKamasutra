@@ -15,7 +15,7 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-    getUsers
+    getUsersReselect
 } from "../redux/usersSelectors";
 
 class UsersContainer extends React.Component{
@@ -47,8 +47,6 @@ class UsersContainer extends React.Component{
         )
     }
 }
-
-
 
 // dispatch закинет сюда connect
 // Без селекторов
@@ -87,14 +85,17 @@ class UsersContainer extends React.Component{
 //     unFollowThunkCreator
 // })(UsersContainer)
 
-const mapStateToProps = (state) => ({
-    users: getUsers(state),
-    pageSize: getPageSize(state),
-    totalUsersCount: getTotalUsersCount(state),
-    currentPage: getCurrentPage(state),
-    isFetching: getIsFetching(state),
-    followUnfollowInProgress: getFollowUnfollowInProgress(state)
-})
+const mapStateToProps = (state) => {
+    console.log('mapStateToProps')
+    return {
+        users: getUsersReselect(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followUnfollowInProgress: getFollowUnfollowInProgress(state)
+    }
+}
 
 export default connect(mapStateToProps,{
         setUsers,

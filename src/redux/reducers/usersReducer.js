@@ -15,11 +15,15 @@ const initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followUnfollowInProgress: [] // Для того чтобы не disable все кнопки, мы сюда будем заносить UserID
+    followUnfollowInProgress: [], // Для того чтобы не disable все кнопки, мы сюда будем заносить UserID
+    fake: 10
 }
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "FAKE": {
+            return {...state, fake: state.fake + 1 }
+        }
         case TOGGLE_IS_FETCHING_USERS:
             return {...state, isFetching: !state.isFetching}
         case SET_USERS:

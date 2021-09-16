@@ -12,6 +12,7 @@ const Users = (props) => {
 
     return (
         <div >
+            {console.log('USERS')}
             <div>
                 {pages.map(page => <span onClick={(e) => {props.setCurrentPageHandler(page)}} className={props.currentPage === page && styles.selected}>{`${page} `}</span>)}
             </div>
