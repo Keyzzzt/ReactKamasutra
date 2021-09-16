@@ -9,6 +9,14 @@ import {
 } from "../redux/reducers/usersReducer";
 import Users from "./Users/Users";
 import Loader from "./common/Loader";
+import {
+    getCurrentPage,
+    getFollowUnfollowInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../redux/usersSelectors";
 
 class UsersContainer extends React.Component{
     componentDidMount() {
@@ -39,17 +47,23 @@ class UsersContainer extends React.Component{
         )
     }
 }
+
+
+
 // dispatch закинет сюда connect
-const mapStateToProps = (state) => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followUnfollowInProgress: state.usersPage.followUnfollowInProgress
-    }
-}
+// Без селекторов
+// const mapStateToProps = (state) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followUnfollowInProgress: state.usersPage.followUnfollowInProgress
+//     }
+// }
+
+
 // dispatch закинет сюда connect
 // const mapDispatchToProps = (dispatch) => {
 //     return {
@@ -72,6 +86,15 @@ const mapStateToProps = (state) => {
 //     followThunkCreator,
 //     unFollowThunkCreator
 // })(UsersContainer)
+
+const mapStateToProps = (state) => ({
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followUnfollowInProgress: getFollowUnfollowInProgress(state)
+})
 
 export default connect(mapStateToProps,{
         setUsers,
