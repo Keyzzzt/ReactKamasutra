@@ -1,9 +1,9 @@
-import {
-    ADD_POST,
-    SET_USER_PROFILE,
-    GET_STATUS
-} from '../const'
+
 import {profileAPI, usersAPI} from "../../api/api";
+
+const ADD_POST = 'thisApp/profileReducer/ADD_POST'
+const SET_USER_PROFILE = 'thisApp/profileReducer/SET_USER_PROFILE'
+const GET_STATUS = 'thisApp/profileReducer/GET_STATUS'
 
 let initialState = {
     posts: [
@@ -40,23 +40,20 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, payload: pr
 export const setStatusAC = (status) => ({type: GET_STATUS, payload: status})
 
 // Thunk creators, use only when we need to make an API request
-export const getUsersProfileThunkCreator = (userId) => (dispatch) => {
-    usersAPI.getUserProfile(userId).then(response => {
+export const getUsersProfileThunkCreator = (userId) => async (dispatch) => {
+    const response = await usersAPI.getUserProfile(userId)
         dispatch(setUserProfile(response))
-    })
 }
 
-export const getStatusThunkCreator = (userId) => (dispatch) => {
-    profileAPI.getStatus(userId).then(response => {
+export const getStatusThunkCreator = (userId) => async (dispatch) => {
+    const response = await profileAPI.getStatus(userId)
         dispatch(setStatusAC(response))
-    })
 }
-export const updateStatusThunkCreator = (statusText) => (dispatch) => {
-    profileAPI.updateStatus(statusText).then(response => {
+export const updateStatusThunkCreator = (statusText) => async (dispatch) => {
+    const response = await profileAPI.updateStatus(statusText)
         if(response.data.resultCode === 0){
             dispatch(setStatusAC(statusText))
         }
-    })
 }
 
 export default profileReducer

@@ -33,18 +33,14 @@ class ProfileContainer extends React.Component{
 
 
     render(){
-        if(!this.props.authorizedUserId){
-            return <Loader />
-        }
-
         return (
             <div>
+                {!this.props.authorizedUserId && <Loader />}
                 <Profile {...this.props}/>
             </div>
         )
     }
 }
-
 // // Без compose()()
 // // Добавляем обертку при помощи HOC, наделяя ее Redirect`ом
 // let AuthRedirectComponent = withAuthRedirect(ProfileContainer)

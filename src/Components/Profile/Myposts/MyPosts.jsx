@@ -6,7 +6,7 @@ import AddPostForm from "../../Forms/AddPostForm";
 
 
 const MyPosts = (props) => {
-  let newPostRef = createRef();
+  console.log('RENDER')
   let postList = props.posts.map(p => <Post key={p.id} message={p.message} />);
 
   const onSubmitHandler = (value) => {

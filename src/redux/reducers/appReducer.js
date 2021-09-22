@@ -1,5 +1,5 @@
-import {SET_INITIALIZED} from "../const";
 import {getUserCredentialsThunkCreator} from "./authReducer";
+const SET_INITIALIZED = "thisApp/appReducer/SET_INITIALIZED"
 
 
 

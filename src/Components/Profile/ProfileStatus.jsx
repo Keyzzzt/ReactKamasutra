@@ -19,6 +19,7 @@ import React from "react";
         })
      }
      deActivateEditMode = () => {
+         // При изменении editMode, status остается неизменным, аналагично и наоборот при изменении status
          this.setState({
              editMode: false
          })
