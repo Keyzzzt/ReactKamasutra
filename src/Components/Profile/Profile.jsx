@@ -1,13 +1,13 @@
 import React from 'react'
-import s from './../../styles/Profile.module.css'
+import style from './../../styles/Profile.module.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import MyPostsContainer from "../MyPostsContainer";
 
 
-const Profile = (props) => {
+const Profile = ({profile, status, updateStatusThunkCreator, isOwner, updateProfileImage}) => {
   return (
-    <div className={s.content}>
-      <ProfileInfo profile={props.profile} status={props.status} updateStatusThunkCreator={props.updateStatusThunkCreator}/>
+    <div className={style.content}>
+      <ProfileInfo profile={profile} status={status} updateStatusThunkCreator={updateStatusThunkCreator} isOwner={isOwner} updateProfileImage={updateProfileImage}/>
       <MyPostsContainer />
     </div>
   );

@@ -35,7 +35,8 @@ class App extends React.Component {
                         <Navbar/>
                         <div className="app-wrapper-content">
                           <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
-                          <Route path='/profile' render={WithSuspense(ProfileContainer)}/>
+                          {/*Если query параметр приходит не всегда, то нужен знак ?, иначе компонента не запустится*/}
+                          <Route path='/profile/:userId?' render={WithSuspense(ProfileContainer)}/>
                           <Route path='/users' render={() => <UsersContainer/>}/>
                           <Route path='/login' render={() => <Login/>}/>
                         </div>

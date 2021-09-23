@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./Profile/Profile";
 import {
     getStatusThunkCreator,
-    getUsersProfileThunkCreator, updateStatusThunkCreator,
+    getUsersProfileThunkCreator, updateProfileImage, updateStatusThunkCreator,
 } from "../redux/reducers/profileReducer";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => ({
 })
 
 class ProfileContainer extends React.Component{
-    componentDidMount() {
+    updateProfile(){
         let userId = this.props.match.params.userId
         if(!userId){
             userId = this.props.authorizedUserId
@@ -30,13 +30,21 @@ class ProfileContainer extends React.Component{
         this.props.getUsersProfileThunkCreator(userId)
         this.props.getStatusThunkCreator(userId)
     }
+    componentDidMount() {
+        this.updateProfile()
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.match.params.userId != prevProps.match.params.userId){
+            this.updateProfile()
+        }
+    }
 
 
     render(){
         return (
             <div>
                 {!this.props.authorizedUserId && <Loader />}
-                <Profile {...this.props}/>
+                <Profile isOwner={!this.props.match.params.userId} {...this.props}/>
             </div>
         )
     }
@@ -51,9 +59,9 @@ class ProfileContainer extends React.Component{
 // export default connect(mapStateToProps, {getUsersProfileThinkCreator})(ProfileContainerWithURL)
 
 export default compose(
-    connect(mapStateToProps, {getUsersProfileThunkCreator, getStatusThunkCreator, updateStatusThunkCreator}),
-    withRouter,
-    withAuthRedirect
+    connect(mapStateToProps, {getUsersProfileThunkCreator, getStatusThunkCreator, updateStatusThunkCreator, updateProfileImage}),
+    withAuthRedirect,
+    withRouter
 )(ProfileContainer)
 
 

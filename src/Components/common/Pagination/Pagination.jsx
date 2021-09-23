@@ -15,9 +15,6 @@ const Pagination = ({totalUsersCount, pageSize, currentPage, setCurrentPageHandl
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
     let rightPortionPageNumber = portionNumber * portionSize
 
-    console.log(portionCount)
-    console.log(portionNumber)
-    console.log(totalUserPages)
     return (
 
             <div>

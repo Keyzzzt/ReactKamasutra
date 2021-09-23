@@ -28,12 +28,14 @@ import React, {useEffect, useState} from "react";
         return <>
             {!editMode &&
                 <div>
+                    <span>Status: </span>
                     <span onDoubleClick={activateEditMode}>{props.status || 'No status.'}</span>
                 </div>
             }
 
             {editMode &&
             <div>
+                <span>Status: </span>
                 <input onChange={onStatusChange} autoFocus={true} onBlur={deActivateEditMode} type="text" value={status} />
             </div>
             }

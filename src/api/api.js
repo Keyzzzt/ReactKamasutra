@@ -47,6 +47,17 @@ export const profileAPI = {
     updateStatus: function (status) {
         return requestSetup
             .put(`profile/status`,{ status: status});
+    },
+    updateProfileImage: function(image) {
+        // объект c заголовком header: Content-Type: form/multipart можно не отправлять в API. Конструктор FormData() формирует его сам автоматически
+        const formData = new FormData()
+        formData.append("image", image)
+        return requestSetup
+            .put(`/profile/photo`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
     }
 
 }

@@ -4,6 +4,7 @@ import {profileAPI, usersAPI} from "../../api/api";
 const ADD_POST = 'thisApp/profileReducer/ADD_POST'
 const SET_USER_PROFILE = 'thisApp/profileReducer/SET_USER_PROFILE'
 const GET_STATUS = 'thisApp/profileReducer/GET_STATUS'
+const UPDATE_PROFILE_IMAGE = 'thisApp/profileReducer/UPDATE_PROFILE_IMAGE'
 
 let initialState = {
     posts: [
@@ -29,6 +30,8 @@ const profileReducer = (state = initialState, action) => {
             return {...state, profile: action.payload}
         case GET_STATUS:
             return {...state, status: action.payload}
+        case UPDATE_PROFILE_IMAGE:
+            return {...state, profile: {...state.profile, photos: action.payload}}
         default:
             return state
     }
@@ -36,8 +39,9 @@ const profileReducer = (state = initialState, action) => {
 
 // Action creators
 export const addPostAC = (value) => ({type: ADD_POST, payload: value})
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, payload: profile})
-export const setStatusAC = (status) => ({type: GET_STATUS, payload: status})
+const setUserProfile = (profile) => ({type: SET_USER_PROFILE, payload: profile})
+const setStatusAC = (status) => ({type: GET_STATUS, payload: status})
+const updateProfileImageAC = (photos) => ({type: UPDATE_PROFILE_IMAGE, payload: photos})
 
 // Thunk creators, use only when we need to make an API request
 export const getUsersProfileThunkCreator = (userId) => async (dispatch) => {
@@ -54,6 +58,12 @@ export const updateStatusThunkCreator = (statusText) => async (dispatch) => {
         if(response.data.resultCode === 0){
             dispatch(setStatusAC(statusText))
         }
+}
+export const updateProfileImage = image => async dispatch => {
+    const response = await profileAPI.updateProfileImage(image)
+    if(response.data.resultCode === 0){
+        dispatch(updateProfileImageAC(response.data.data.photos))
+    }
 }
 
 export default profileReducer

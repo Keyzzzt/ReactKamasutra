@@ -48,42 +48,6 @@ class UsersContainer extends React.Component{
     }
 }
 
-// dispatch закинет сюда connect
-// Без селекторов
-// const mapStateToProps = (state) => {
-//     return {
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followUnfollowInProgress: state.usersPage.followUnfollowInProgress
-//     }
-// }
-
-
-// dispatch закинет сюда connect
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         followUnfollow: (userId) => dispatch(followUnfollowAC(userId)),
-//         setUsersAC: (users) => dispatch(setUsersAC(users)),
-//         setCurrentPage: (pageNumber) => dispatch(setCurrentPageAC(pageNumber)),
-//         setTotalUsersCountAC: (totalCount) => dispatch(setTotalUsersCountAC(totalCount)),
-//         toggleIsFetching: () => dispatch(toggleIsFetchingAC())
-//     }
-// }
-
-
-// // Без compose
-// const UsersWithRedirect = withAuthRedirect(UsersContainer)
-// export default connect(mapStateToProps,{
-//     setUsersAC,
-//     setCurrentPage,
-//     setTotalUsersCountAC,
-//     getUsersThunkCreator,
-//     followThunkCreator,
-//     unFollowThunkCreator
-// })(UsersContainer)
 
 const mapStateToProps = (state) => {
     return {
