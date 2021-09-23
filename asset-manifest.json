@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/ReactKamasutra/static/css/main.30c1c1dc.chunk.css",
+    "main.js": "/ReactKamasutra/static/js/main.991ac4bc.chunk.js",
+    "main.js.map": "/ReactKamasutra/static/js/main.991ac4bc.chunk.js.map",
+    "runtime-main.js": "/ReactKamasutra/static/js/runtime-main.18650078.js",
+    "runtime-main.js.map": "/ReactKamasutra/static/js/runtime-main.18650078.js.map",
+    "static/js/2.b0cfeaa9.chunk.js": "/ReactKamasutra/static/js/2.b0cfeaa9.chunk.js",
+    "static/js/2.b0cfeaa9.chunk.js.map": "/ReactKamasutra/static/js/2.b0cfeaa9.chunk.js.map",
+    "static/css/3.5aedb4ac.chunk.css": "/ReactKamasutra/static/css/3.5aedb4ac.chunk.css",
+    "static/js/3.261b1723.chunk.js": "/ReactKamasutra/static/js/3.261b1723.chunk.js",
+    "static/js/3.261b1723.chunk.js.map": "/ReactKamasutra/static/js/3.261b1723.chunk.js.map",
+    "static/css/4.f3a4f91d.chunk.css": "/ReactKamasutra/static/css/4.f3a4f91d.chunk.css",
+    "static/js/4.10f1bae6.chunk.js": "/ReactKamasutra/static/js/4.10f1bae6.chunk.js",
+    "static/js/4.10f1bae6.chunk.js.map": "/ReactKamasutra/static/js/4.10f1bae6.chunk.js.map",
+    "index.html": "/ReactKamasutra/index.html",
+    "static/css/3.5aedb4ac.chunk.css.map": "/ReactKamasutra/static/css/3.5aedb4ac.chunk.css.map",
+    "static/css/4.f3a4f91d.chunk.css.map": "/ReactKamasutra/static/css/4.f3a4f91d.chunk.css.map",
+    "static/css/main.30c1c1dc.chunk.css.map": "/ReactKamasutra/static/css/main.30c1c1dc.chunk.css.map",
+    "static/js/2.b0cfeaa9.chunk.js.LICENSE.txt": "/ReactKamasutra/static/js/2.b0cfeaa9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.18650078.js",
+    "static/js/2.b0cfeaa9.chunk.js",
+    "static/css/main.30c1c1dc.chunk.css",
+    "static/js/main.991ac4bc.chunk.js"
+  ]
+}
