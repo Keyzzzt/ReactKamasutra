@@ -2,7 +2,7 @@
   "name": "react-kamasutra",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://keyzzzt.github.io/ReactKamasutra",
+  "homepage": "https://keyzzzt.github.io/ReactKamasutra/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
