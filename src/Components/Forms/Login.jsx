@@ -7,18 +7,18 @@ import {loginThunkCreator} from "../../redux/reducers/authReducer";
 import {Redirect} from "react-router-dom";
 import styles from './../common/FormsControls/formControls.module.css'
 
-const Login = ({loginThunkCreator, isAuth}) => {
+const Login = ({loginThunkCreator, isAuth, captchaURL}) => {
     // 3. Говорим что делать с данными
-    const onSubmitHandler = ({email, password, rememberMe}) => {
-        loginThunkCreator(email, password, rememberMe)
+    const onSubmitHandler = ({email, password, rememberMe, captcha}) => {
+        loginThunkCreator(email, password, rememberMe, captcha)
     }
-    if(isAuth){
-        return <Redirect to={"/profile"} />
+    if (isAuth) {
+        return <Redirect to={"/profile"}/>
     }
     return (
         <div>
             {/* 2. Объект который собрал handleSubmit мы передаем сюда*/}
-            <ReduxLoginForm onSubmit={onSubmitHandler}/>
+            <ReduxLoginForm onSubmit={onSubmitHandler} captchaURL={captchaURL}/>
         </div>
     )
 }
@@ -28,14 +28,16 @@ const Login = ({loginThunkCreator, isAuth}) => {
 const maxLength20 = maxLengthCreator(20)
 
 // В props redux-form закинет очень много функционала
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, captchaURL}) => {
     return (
         // 1. handleSubmit сделает preventDefault, соберет введенные данные и упакует их в объект
         <form onSubmit={handleSubmit}>
             <h1>Login</h1>
-             {createField("email", "email", "Enter email", Input, [required, maxLength20])}
-             {createField("password", "password", "Enter password", Input, [required, maxLength20])}
-             {createField("rememberMe", "checkbox", null, Input, [], "Remember Me")}
+            {createField("email", "email", "Enter email", Input, [required, maxLength20])}
+            {createField("password", "password", "Enter password", Input, [required, maxLength20])}
+            {createField("rememberMe", "checkbox", null, Input, [], "Remember Me")}
+            {captchaURL && <img src={captchaURL} alt=""/>}
+            {captchaURL && createField("captcha", "text", "Enter symbols", Input, [required])}
             {error && <div className={styles.formSummaryError}>{error}</div>}
             <div>
                 <button>Submit</button>
@@ -51,6 +53,7 @@ const ReduxLoginForm = reduxForm({
 })(LoginForm)
 
 const mapStateToProps = (state) => ({
+    captchaURL: state.auth.captchaURL,
     isAuth: state.auth.isAuth
 })
 
