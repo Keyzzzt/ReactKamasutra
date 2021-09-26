@@ -1,4 +1,4 @@
-import React, {Suspense} from "react";
+import React from "react";
 import {Route, BrowserRouter} from 'react-router-dom'
 import Navbar from './Components/Navbar/Navbar'
 import  './styles/App.css'

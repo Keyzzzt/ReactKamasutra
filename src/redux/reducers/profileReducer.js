@@ -1,10 +1,12 @@
 
 import {profileAPI, usersAPI} from "../../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'thisApp/profileReducer/ADD_POST'
 const SET_USER_PROFILE = 'thisApp/profileReducer/SET_USER_PROFILE'
 const GET_STATUS = 'thisApp/profileReducer/GET_STATUS'
 const UPDATE_PROFILE_IMAGE = 'thisApp/profileReducer/UPDATE_PROFILE_IMAGE'
+const EDIT_PROFILE_SUCCESS = 'thisApp/profileReducer/EDIT_PROFILE_SUCCESS'
 
 let initialState = {
     posts: [
@@ -13,7 +15,8 @@ let initialState = {
         {id:3, message: 'James Bond', likesCount: 2},
     ],
     profile: null,
-    status: ''
+    status: '',
+    editProfileSuccess: false
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -32,6 +35,8 @@ const profileReducer = (state = initialState, action) => {
             return {...state, status: action.payload}
         case UPDATE_PROFILE_IMAGE:
             return {...state, profile: {...state.profile, photos: action.payload}}
+        case EDIT_PROFILE_SUCCESS:
+            return {...state, editProfileSuccess: action.payload}
         default:
             return state
     }
@@ -42,6 +47,7 @@ export const addPostAC = (value) => ({type: ADD_POST, payload: value})
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE, payload: profile})
 const setStatusAC = (status) => ({type: GET_STATUS, payload: status})
 const updateProfileImageAC = (photos) => ({type: UPDATE_PROFILE_IMAGE, payload: photos})
+
 
 // Thunk creators, use only when we need to make an API request
 export const getUsersProfileThunkCreator = (userId) => async (dispatch) => {
@@ -63,6 +69,20 @@ export const updateProfileImage = image => async dispatch => {
     const response = await profileAPI.updateProfileImage(image)
     if(response.data.resultCode === 0){
         dispatch(updateProfileImageAC(response.data.data.photos))
+    }
+}
+
+export const saveProfile = profile => async (dispatch, getState) => {
+    dispatch({type: EDIT_PROFILE_SUCCESS, payload: false})
+    const userId = getState().auth.userId
+    const response = await profileAPI.saveProfile(profile)
+    if(response.data.resultCode === 0){
+        dispatch({type: EDIT_PROFILE_SUCCESS, payload: true})
+        dispatch(getUsersProfileThunkCreator(userId))
+
+    } else {
+        let errorMessage = response.data.messages[0]
+        dispatch(stopSubmit('editProfile', {_error: errorMessage}))
     }
 }
 

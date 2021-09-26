@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./Profile/Profile";
 import {
     getStatusThunkCreator,
-    getUsersProfileThunkCreator, updateProfileImage, updateStatusThunkCreator,
+    getUsersProfileThunkCreator, saveProfile, updateProfileImage, updateStatusThunkCreator,
 } from "../redux/reducers/profileReducer";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
@@ -14,7 +14,8 @@ const mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorizedUserId: state.auth.userId,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    editProfileSuccess: state.profilePage.editProfileSuccess
 })
 
 class ProfileContainer extends React.Component{
@@ -34,7 +35,7 @@ class ProfileContainer extends React.Component{
         this.updateProfile()
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.match.params.userId != prevProps.match.params.userId){
+        if (this.props.match.params.userId !== prevProps.match.params.userId){
             this.updateProfile()
         }
     }
@@ -59,7 +60,7 @@ class ProfileContainer extends React.Component{
 // export default connect(mapStateToProps, {getUsersProfileThinkCreator})(ProfileContainerWithURL)
 
 export default compose(
-    connect(mapStateToProps, {getUsersProfileThunkCreator, getStatusThunkCreator, updateStatusThunkCreator, updateProfileImage}),
+    connect(mapStateToProps, {getUsersProfileThunkCreator, getStatusThunkCreator, updateStatusThunkCreator, updateProfileImage, saveProfile}),
     withAuthRedirect,
     withRouter
 )(ProfileContainer)

@@ -28,7 +28,7 @@ export const usersAPI = {
     },
     // Следующим образом мы можем старый метод который испоьзуется в коде, оставить рабочим, но функционал делегировать другому методу.
     getUserProfile: function(userId){
-        console.warn('Obsolete method. Please use profileAPI object.')
+        // console.warn('Obsolete method. Please use profileAPI object.')
         return profileAPI.getUserProfile(userId);
     },
 }
@@ -45,8 +45,7 @@ export const profileAPI = {
             .then(response => response.data)
     },
     updateStatus: function (status) {
-        return requestSetup
-            .put(`profile/status`,{ status: status});
+        return requestSetup.put(`profile/status`,{status});
     },
     updateProfileImage: function(image) {
         // объект c заголовком header: Content-Type: form/multipart можно не отправлять в API. Конструктор FormData() формирует его сам автоматически
@@ -58,9 +57,11 @@ export const profileAPI = {
                     'Content-Type': 'multipart/form-data'
                 }
             })
+    },
+    saveProfile: function (profile) {
+        return requestSetup.put(`profile`, profile);
+        }
     }
-
-}
 
 export const authAPI = {
     authMe: function(){

@@ -41,7 +41,7 @@ const usersReducer = (state = initialState, action) => {
                     [...state.followUnfollowInProgress, action.payload.userId]
                         :
                     // Получили ответ с сервера - убрали userId из массива followUnfollowInProgress
-                    [...state.followUnfollowInProgress.filter(id => id != action.payload.userId)]
+                    [...state.followUnfollowInProgress.filter(id => id !== action.payload.userId)]
             }
         // case FOLLOW:
         //    return {...state, users: state.users.map(user => {
@@ -59,8 +59,6 @@ const usersReducer = (state = initialState, action) => {
         //             }
         //             return user
         //         })}
-        case FOLLOW:
-            return {...state, users: updateObjectInArray(state.users, action.payload, "id", {followed: false})}
         case SET_ACTIVE_PAGE :
             return {...state, currentPage: action.payload}
         default:

@@ -1,12 +1,9 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import s from './../../../styles/MyPosts.module.css';
 import Post from './Post/Post';
 import AddPostForm from "../../Forms/AddPostForm";
 
-
-
 const MyPosts = (props) => {
-  console.log('RENDER')
   let postList = props.posts.map(p => <Post key={p.id} message={p.message} />);
 
   const onSubmitHandler = (value) => {
