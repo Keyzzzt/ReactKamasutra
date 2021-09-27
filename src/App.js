@@ -1,8 +1,7 @@
 import React from "react";
-import {Route, BrowserRouter} from 'react-router-dom'
+import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom'
 import Navbar from './Components/Navbar/Navbar'
-import  './styles/App.css'
-
+import './styles/App.css'
 import UsersContainer from "./Components/UsersContainer";
 import HeaderContainer from "./Components/HeaderContainer";
 import Login from "./Components/Forms/Login";
@@ -19,32 +18,44 @@ const DialogsContainer = React.lazy(() => import('./Components/DialogsContainer'
 const ProfileContainer = React.lazy(() => import('./Components/ProfileContainer'))
 
 
-
 class App extends React.Component {
+    handleUncatchedErrors = (reason, promise) => {
+        alert('some error')
+    }
+
     componentDidMount() {
         this.props.initializeApp()
+        // Если мы в компоненте добавляет слушателя события, то его обязательно необходимо убрать при демонтаже компоненты.
+        // В классовой компоненте это componentWillUnmount()
+        window.addEventListener('unhandledrejection', this.handleUncatchedErrors)
+    }
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.handleUncatchedErrors)
+
     }
 
     render() {
-        if(!this.props.initialized){
-            return <Loader />
+        if (!this.props.initialized) {
+            return <Loader/>
         }
         return (
-                      <div className="app-wrapper">
-                        <HeaderContainer/>
-                        <Navbar/>
-                        <div className="app-wrapper-content">
-                          <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
-                          {/*Если query параметр приходит не всегда, то нужен знак ?, иначе компонента не запустится*/}
-                          <Route path='/profile/:userId?' render={WithSuspense(ProfileContainer)}/>
-                          <Route path='/users' render={() => <UsersContainer/>}/>
-                          <Route path='/login' render={() => <Login/>}/>
-                        </div>
-                      </div>
+            <div className="app-wrapper">
+                <HeaderContainer/>
+                <Navbar/>
+                <div className="app-wrapper-content">
+                    <Redirect from="/" to="/profile" />
+                    <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
+                    {/*Если query параметр приходит не всегда, то нужен знак ?, иначе компонента не запустится*/}
+                    <Route path='/profile/:userId?' render={WithSuspense(ProfileContainer)}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
+                </div>
+            </div>
 
         );
-  }
+    }
 }
+
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
@@ -56,7 +67,7 @@ const MainApp = (props) => {
     return (
         <BrowserRouter>
             <Provider store={store}>
-                <AppContainer />
+                <AppContainer/>
             </Provider>
         </BrowserRouter>
     )

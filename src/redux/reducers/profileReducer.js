@@ -1,4 +1,3 @@
-
 import {profileAPI, usersAPI} from "../../api/api";
 import {stopSubmit} from "redux-form";
 
@@ -10,9 +9,9 @@ const EDIT_PROFILE_SUCCESS = 'thisApp/profileReducer/EDIT_PROFILE_SUCCESS'
 
 let initialState = {
     posts: [
-        {id:1, message: 'James', likesCount: 2},
-        {id:2, message: 'Bond', likesCount: 2},
-        {id:3, message: 'James Bond', likesCount: 2},
+        {id: 1, message: 'James', likesCount: 2},
+        {id: 2, message: 'Bond', likesCount: 2},
+        {id: 3, message: 'James Bond', likesCount: 2},
     ],
     profile: null,
     status: '',
@@ -20,7 +19,7 @@ let initialState = {
 }
 
 const profileReducer = (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case ADD_POST: {
             let newPost = {
                 id: 3,
@@ -52,22 +51,27 @@ const updateProfileImageAC = (photos) => ({type: UPDATE_PROFILE_IMAGE, payload: 
 // Thunk creators, use only when we need to make an API request
 export const getUsersProfileThunkCreator = (userId) => async (dispatch) => {
     const response = await usersAPI.getUserProfile(userId)
-        dispatch(setUserProfile(response))
+    dispatch(setUserProfile(response))
 }
 
 export const getStatusThunkCreator = (userId) => async (dispatch) => {
-    const response = await profileAPI.getStatus(userId)
+    try {
+        const response = await profileAPI.getStatus(userId)
         dispatch(setStatusAC(response))
+
+    } catch (e) {
+    // Этот блок выполнится если promise зарезолвится с ошибкой.
+    }
 }
 export const updateStatusThunkCreator = (statusText) => async (dispatch) => {
     const response = await profileAPI.updateStatus(statusText)
-        if(response.data.resultCode === 0){
-            dispatch(setStatusAC(statusText))
-        }
+    if (response.data.resultCode === 0) {
+        dispatch(setStatusAC(statusText))
+    }
 }
 export const updateProfileImage = image => async dispatch => {
     const response = await profileAPI.updateProfileImage(image)
-    if(response.data.resultCode === 0){
+    if (response.data.resultCode === 0) {
         dispatch(updateProfileImageAC(response.data.data.photos))
     }
 }
@@ -76,7 +80,7 @@ export const saveProfile = profile => async (dispatch, getState) => {
     dispatch({type: EDIT_PROFILE_SUCCESS, payload: false})
     const userId = getState().auth.userId
     const response = await profileAPI.saveProfile(profile)
-    if(response.data.resultCode === 0){
+    if (response.data.resultCode === 0) {
         dispatch({type: EDIT_PROFILE_SUCCESS, payload: true})
         dispatch(getUsersProfileThunkCreator(userId))
 

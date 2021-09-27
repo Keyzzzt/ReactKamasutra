@@ -4,7 +4,9 @@ const SET_INITIALIZED = "thisApp/appReducer/SET_INITIALIZED"
 
 
 let initialState = {
-    initialized: false
+    initialized: false,
+    // Сюда можно закинуть ошибку, которую мы слушаем в App.js и показать ее, и по таймауту ее убрать.
+    globalError: null
 }
 
 export const appReducer = (state = initialState, action) => {
